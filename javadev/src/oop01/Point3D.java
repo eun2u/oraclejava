@@ -5,7 +5,7 @@ public class Point3D extends Point2D{
 	public Point3D() {
 		//하위 클래스의 생성자는 반드시 부모클래스의 생성자 호출
 		// super()
-		
+		this(10,20,30);
 		System.out.println("Point3D() 수행 중");
 	}
 	public Point3D(int x, int y, int z) {

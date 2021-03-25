@@ -9,7 +9,7 @@ public class PointTest {
 //		Point2D pt2=new Point2D(10,20);
 //		pt2.print();
 		
-		Point3D pt3 = new Point3D(100,200,300);
+		Point3D pt3 = new Point3D();
 		pt3.print();
 		
 		
