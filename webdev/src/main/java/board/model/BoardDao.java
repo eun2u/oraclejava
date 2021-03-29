@@ -8,20 +8,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 public class BoardDao { //DAO(Data Access Object)
 	
 	private static BoardDao boardDao = null;
+	private DataSource ds=null;
 	
 	private BoardDao() {
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-		} catch (ClassNotFoundException e) {
+			//Class.forName("oracle.jdbc.OracleDriver");
+			Context context = new InitialContext();
+			ds = (DataSource) context.lookup("java:comp/env/OracleCP");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	private Connection getConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "oraclejava", "oraclejava");
+	//	return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "oraclejava", "oraclejava");
+		return ds.getConnection(); //미리 준비된 커넥션 풀에서 하나 반환
 	}
 	
 
@@ -191,6 +199,32 @@ public class BoardDao { //DAO(Data Access Object)
 			ps.setString(3, boardDto.getContent());
 			ps.setLong(4, boardDto.getNo());
 			ps.setString(5, boardDto.getPassword());
+			
+			if(ps.executeUpdate() > 0) {
+				result=true;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose(cn, ps);
+		}
+		
+		return result;
+	}
+	public boolean deleteBoard(BoardDto boardDto) {//삭제
+		Connection cn=null;
+		PreparedStatement ps = null;
+		
+		String sql= "DELETE from m1board "+ 
+					"WHERE no= ? AND password= ? ";
+		
+		boolean result=false;
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			ps.setLong(1, boardDto.getNo());
+			ps.setString(2, boardDto.getPassword());
 			
 			if(ps.executeUpdate() > 0) {
 				result=true;

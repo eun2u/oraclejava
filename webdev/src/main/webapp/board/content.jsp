@@ -55,6 +55,6 @@
 </table><br/>
 <a href="list.jsp">[리스트]</a>
 <a href="update.jsp?no=<%=boardDto.getNo()%>">[수정]</a>
-<a href="">[삭제]</a>
+<a href="delete.jsp?no=<%=boardDto.getNo()%>">[삭제]</a>
 </body>
 </html>
