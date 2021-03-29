@@ -10,7 +10,9 @@ import java.util.List;
 
 public class BoardDao { //DAO(Data Access Object)
 	
-	public BoardDao() {
+	private static BoardDao boardDao = null;
+	
+	private BoardDao() {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 		} catch (ClassNotFoundException e) {
@@ -20,6 +22,15 @@ public class BoardDao { //DAO(Data Access Object)
 	
 	private Connection getConnection() throws SQLException {
 		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "oraclejava", "oraclejava");
+	}
+	
+
+	public static BoardDao getInstance() {
+		if(boardDao==null) {
+			boardDao=new BoardDao();
+		}
+		
+		return boardDao;
 	}
 	
 	private void dbClose(Connection cn, PreparedStatement ps, ResultSet rs) {

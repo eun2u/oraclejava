@@ -17,7 +17,8 @@
 	boardDto.setContent(content);
 	
 	
-	BoardDao boardDao = new BoardDao();
+	BoardDao boardDao = BoardDao.getInstance();
+	System.out.println("boardDao hashcode : "+ boardDao.hashCode());
 	boolean result = boardDao.insertBoard(boardDto);
 
 %>
