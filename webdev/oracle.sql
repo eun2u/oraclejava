@@ -14,3 +14,5 @@ CREATE TABLE m1board(
 CREATE SEQUENCE m1board_seq NOCACHE;
 
 select * from m1board;
+
+delete from m1board where no=2;
