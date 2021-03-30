@@ -3,7 +3,7 @@ package board.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModelAndView {
+public class ModelAndView { //다음 이동할 view의 경로와 그 view에 뿌려줄 데이터를 포함
 	private Map<String, Object> model = new HashMap<String, Object>();
 	private String viewName;
 	
@@ -29,7 +29,7 @@ public class ModelAndView {
 	public void setViewName(String viewName) {
 		this.viewName = viewName;
 	}
-	public void addObject(String key, Object obj) { //model 맵에 key와 value로 저장
+	public void addObject(String key, Object obj) { //model 맵에 key와 value로 저장. setAttribute할 때 사용
 		model.put(key, obj);
 		
 	}

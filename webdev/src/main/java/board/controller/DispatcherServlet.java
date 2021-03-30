@@ -78,7 +78,6 @@ public class DispatcherServlet extends HttpServlet {
 				return;
 			}
 			
-			
 			Map<String, Object> model = mav.getModel();
 			
 			for(String key: model.keySet()) {
