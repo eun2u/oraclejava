@@ -7,7 +7,6 @@ public class BasketMember {
 	private double point;
 	
 	
-	
 	public BasketMember(String name, String postion, int no, double point) {
 		super();
 		this.name = name;

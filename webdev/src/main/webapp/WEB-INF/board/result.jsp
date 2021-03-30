@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-	response.sendRedirect("BoardInsert.do");
-%>
+<script type="text/javascript">
+	alert('${msg}');
+	location.href ='${url}';
+</script>
 </body>
 </html>
