@@ -37,4 +37,14 @@
   	<servlet-name>game</servlet-name>
   	<url-pattern>/game.mvc</url-pattern>
   </servlet-mapping>
+  
+  
+   <servlet>
+  	<servlet-name>basket</servlet-name>
+  	<servlet-class>test.mvc.BasketFront</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basket</servlet-name>
+  	<url-pattern>/BasketFront</url-pattern>
+  </servlet-mapping>
 </web-app>

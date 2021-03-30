@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-뷁
+<%
+	response.sendRedirect("BasketFront");
+%>
 </body>
 </html>

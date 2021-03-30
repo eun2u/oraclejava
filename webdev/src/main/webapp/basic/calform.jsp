@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="calendar2.jsp" method="post"></form>
+<form action="calendar2.jsp" method="post">
 <input type="number" name="year" min="2010" max="2025" value="2021"/>년
 <input type="number" name="month" min="1" max="12" value="3"/>월
 <input type="submit" value="확인" />
+</form>
 </body>
 </html>

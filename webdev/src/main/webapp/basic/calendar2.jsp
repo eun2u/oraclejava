@@ -32,7 +32,7 @@
 	sweek=cal.get(Calendar.DAY_OF_WEEK);
 	eday=cal.getActualMaximum(Calendar.DATE);
 %>
-<form action="calendar2.jsp" method="post"></form>
+<form action="calendar2.jsp" method="post">
 <input type="number" name="year" min="2010" max="2025" value="<%=year %>"/>년
 <input type="number" name="month" min="1" max="12" value="<%=month %>"/>월
 <input type="submit" value="확인" />
