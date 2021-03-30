@@ -8,7 +8,7 @@
 </head>
 <body>
 <%
-	response.sendRedirect("BoardInsert.do");
+	response.sendRedirect("BoardList.do");
 %>
 </body>
 </html>

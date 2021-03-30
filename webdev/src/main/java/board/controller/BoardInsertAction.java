@@ -32,14 +32,13 @@ public class BoardInsertAction extends AbstractController {
 		
 		ModelAndView mav = new ModelAndView("/WEB-INF/board/result.jsp");
 		if(result) {
-			mav.addObject("msg", "글이 등록되었습니다.");
-			mav.addObject("url", "BoardList.do");
+			return new ModelAndView("redirect:BoardList.do");
 		}else {
 			mav.addObject("msg", "글 등록 실패");
 			mav.addObject("url", "javascript:history.back();");
+			return mav;
 		}
 		
-		return mav;
 	}
 
 }

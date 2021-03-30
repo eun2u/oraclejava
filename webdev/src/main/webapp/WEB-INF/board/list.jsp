@@ -1,20 +1,12 @@
-<%@page import="board.model.BoardDao"%>
-<%@page import="board.model.BoardDto"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	BoardDao boardDao = BoardDao.getInstance(); //싱글톤으로 객체 받아옴
-	System.out.println("boardDao hashcode : "+ boardDao.hashCode());
-	List<BoardDto> list = boardDao.getBoardList();
-%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>게시판 리스트</title>
-<link rel="stylesheet" href="../css/board.css" type="text/css" />
+<link rel="stylesheet" href="css/board.css" type="text/css" />
 </head>
 <body>
 <table width="600">
@@ -26,16 +18,16 @@
 	<th>작성일</th>
 	<th>조회수</th>
 </tr>
-<%for(BoardDto dto : list){ %>
+<c:forEach items="${list}" var="dto">
 <tr>
-	<td><%=dto.getNo()%></td>
-	<td><a href="content.jsp?no=<%=dto.getNo()%>"><%=dto.getTitle() %></a></td>
-	<td><%=dto.getName() %></td>
-	<td><%=dto.getWriteday() %></td>
-	<td align="right"><%=dto.getReadcount() %></td>
+	<td>${dto.no}</td>
+	<td><a href="BoardView.do?no=${dto.no}">${dto.title}</a></td>
+	<td>${dto.name}</td>
+	<td>${dto.writeday}</td>
+	<td align="right">${dto.readcount}</td>
 </tr>
-<%} %>
+</c:forEach>
 </table>
-<a href="insert.jsp">[글쓰기]</a>
+<a href="BoardInsert.do">[글쓰기]</a>
 </body>
 </html>
