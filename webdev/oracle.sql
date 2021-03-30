@@ -15,4 +15,4 @@ CREATE SEQUENCE m1board_seq NOCACHE;
 
 select * from m1board;
 
-delete from m1board where no=6 and password='1111';
+delete from m1board where no=18;

@@ -19,8 +19,18 @@ public class DispatcherServlet extends HttpServlet {
 	private Logger logger = Logger.getLogger(DispatcherServlet.class);
 	private Map<String, AbstractController> actionMap = new HashMap<String, AbstractController>();
 	
+	public DispatcherServlet() {
+		System.out.println("DispatcherServlet 생성");
+	}
+	private void destory() {
+		System.out.println("destroy() 메소드 수행");
+	}
+	
+	
 	@Override
 	public void init() throws ServletException {
+		System.out.println("init() 메소드 수행");
+		
 		String props=this.getClass().getResource("dispatcher.properties").getPath();
 		Properties pr = new Properties();
 		FileInputStream f=null;
@@ -33,8 +43,8 @@ public class DispatcherServlet extends HttpServlet {
 		}
 		
 		for(Object obj : pr.keySet()) {
-			String key = (String) obj; //예) /BoardInsert.do
-			String className = pr.getProperty(key); //예) board.controller.boardInsert
+			String key = ((String) obj).trim();				 //예) /BoardInsert.do
+			String className = (pr.getProperty(key)).trim(); //예) board.controller.boardInsert
 			
 			try {
 				Class<?> actionClass = Class.forName(className);
@@ -43,11 +53,12 @@ public class DispatcherServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 		}
 	}
+	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("service() 메소드 수행");
 		String requestURI = request.getRequestURI();
 		String action = requestURI.substring(request.getContextPath().length());
 		logger.info(requestURI);
