@@ -26,7 +26,7 @@ public class EnumMethodTest {
 			String strDay = args[0];
 			strDay = strDay.toUpperCase();
 			
-			Week weekDay = Week.valueOf(strDay);
+			Week weekDay = Week.valueOf(strDay); //인자로 주어진 문자열과 동일한 문자열을 가지는 열거형 객체 리턴
 			if(weekDay==Week.SATURDAY || weekDay == Week.SUNDAY ) {
 				System.out.println("주말이군요!!!");
 			}else {
