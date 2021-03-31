@@ -34,12 +34,13 @@ public class BoardDeleteAction extends AbstractController {
 		
 		ModelAndView mav = new ModelAndView("/WEB-INF/board/result.jsp");
 		if(result) {
-			return new ModelAndView("redirect:BoardList.do");
+			mav.addObject("msg", no+"번 게시물이 삭제되었습니다.");
+			mav.addObject("url", "BoardList.do");
 		}else {
-			mav.addObject("msg", "글 삭제 실패");
+			mav.addObject("msg", "비밀번호가 틀립니다.");
 			mav.addObject("url", "javascript:history.back();");
-			return mav;
 		}
-		
+		return mav;
+
 	}
 }
