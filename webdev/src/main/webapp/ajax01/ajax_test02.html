@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/webdev/img/favicon.png">
+<script type="text/javascript">
+var crateXMLHttpRequest = function(){
+	var xhr = null;
+	if(window.ActiveXObject){ //익스플로러 5.0 이상 구버전
+		xhr= new ActiveXObject();
+	//	alert('익스플로러에서 xhr 생성');
+	}else if(window.XMLHttpRequest){ // 그 외 부라우저 : 크롬, 파이어폭스, 사파리, 익스플로러 최신버전
+		xhr = new XMLHttpRequest();
+	//	alert('XMLHttpRequest 생성')
+	}
+	
+	return xhr;
+}
+
+var load = function(url){
+	var xhr=crateXMLHttpRequest();
+	var name= document.getElementById('name').value;
+	
+	xhr.open('GET', url+'?name='+name, true ); //true: 비동기 방식
+	xhr.onreadystatechange = function(){ //콜백함수 : 특정한 상황에 알아서 동작하는 함수
+
+		if(xhr.readyState == 4){
+			if(xhr.status == 200){
+				console.log('ok~!');
+				process(xhr);
+			}else{
+				console.log('에러 : '+ xhr.status); //404, 500 에러...
+			}
+		}
+	}
+	xhr.send(null);
+}
+
+var process = function(xhr){
+	document.getElementById('rcvData').innerHTML = '<h1>'+xhr.responseText+'</h1>';
+}
+
+
+</script>
+</head>
+<body>
+<input type="text" id="name"/>
+<input type="button" value="say" onclick="load('iam.jsp');"/>
+<hr/>
+<div id="rcvData"></div>
+<hr/>
+</body>
+</html>

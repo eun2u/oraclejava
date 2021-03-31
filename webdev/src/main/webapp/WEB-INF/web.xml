@@ -39,7 +39,7 @@
   </servlet-mapping>
   
   
-   <servlet>
+  <servlet>
   	<servlet-name>basket</servlet-name>
   	<servlet-class>test.mvc.BasketFront</servlet-class>
   </servlet>
@@ -48,12 +48,21 @@
   	<url-pattern>/BasketFront</url-pattern>
   </servlet-mapping>
   
-     <servlet>
-  	<servlet-name>dispatcher</servlet-name>
-  	<servlet-class>board.controller.DispatcherServlet</servlet-class>
+  <servlet>
+  	<servlet-name>check</servlet-name>
+  	<servlet-class>servlet.Iam</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>dispatcher</servlet-name>
-  	<url-pattern>*.do</url-pattern>
+  	<servlet-name>check</servlet-name>
+  	<url-pattern>/Iam</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>aaa</servlet-name>
+  	<servlet-class>servlet.CheckID</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>aaa</servlet-name>
+  	<url-pattern>/CheckID</url-pattern>
   </servlet-mapping>
 </web-app>
