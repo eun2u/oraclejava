@@ -40,6 +40,39 @@ function validate(){
 		f.user_pw.focus();
 		return;
 	}
+	if(f.user_birth.value==''){
+		alert("생년월일을 입력하세요.");
+		f.user_birth.focus();
+		return;
+	}
+	if(f.user_phone.value==''){
+		alert("연락처를 입력하세요.");
+		f.user_phone.focus();
+		return;
+	}
+	
+	if(f.zipcode.value==''){
+		alert("우편번호를 입력하세요.");
+		f.zipcode.focus();
+		return;
+	}
+	
+	if(f.address1.value==''){
+		alert("주소를 입력하세요.");
+		f.address1.focus();
+		return;
+	}
+	if(f.address2.value==''){
+		alert("상세 주소를 입력하세요.");
+		f.address2.focus();
+		return;
+	}
+	if(user_id_count !=0){
+		alert("사용할 수 없는 아이디입니다.");
+		f.user_id.focus();
+		return;
+	}
+	
 
 	f.method = 'POST';
 	f.action = 'MemberRegisterAction.do';

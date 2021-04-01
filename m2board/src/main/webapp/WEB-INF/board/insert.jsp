@@ -17,14 +17,6 @@
 	<td><input type="text" name="title" autofocus="autofocus" required="required"/></td>
 </tr>
 <tr>
-	<th>이름</th>
-	<td><input type="text" name="name" required="required"/></td>
-</tr>
-<tr>
-	<th>비밀번호</th>
-	<td><input type="password" name="password" required="required"/></td>
-</tr>
-<tr>
 	<th>내용</th>
 	<td><textarea rows="5" cols="50" name="content" required="required"></textarea> </td>
 </tr>

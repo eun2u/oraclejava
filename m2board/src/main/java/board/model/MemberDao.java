@@ -119,4 +119,70 @@ public class MemberDao { //DAO(Data Access Object)
 		return result;	
 	}
 
+	public boolean registerMember(MemberDto memberDto) {
+		Connection cn = null;
+		PreparedStatement ps = null;
+		boolean result=false;
+		String sql = "INSERT INTO TBL_MEMBER(id,password,name,birth,phone, zipcode, address1, address2) "+
+					 "VALUES(?, ?,?,?,?,?,?,?) ";
+		
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			
+			ps.setString(1, memberDto.getId());
+			ps.setString(2, memberDto.getPassword());
+			ps.setString(3, memberDto.getName());
+			ps.setString(4, memberDto.getBirth());
+			ps.setString(5, memberDto.getPhone());
+			ps.setString(6, memberDto.getZipcode());
+			ps.setString(7, memberDto.getAddress1());
+			ps.setString(8, memberDto.getAddress2());
+			
+			ps.executeUpdate();
+			result=true;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose(cn, ps);
+		}
+		
+		return result;
+	}
+
+	public MemberDto getUser(MemberDto memberDto) {
+		
+		Connection cn = null;
+		PreparedStatement ps = null;
+		ResultSet rs =null;
+		
+		MemberDto userInfo = null;
+		
+		String sql ="SELECT id, name "+
+					"FROM tbl_member "+
+					"WHERE id=? AND password=? ";
+		
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			ps.setString(1, memberDto.getId());
+			ps.setString(2, memberDto.getPassword());
+			rs=ps.executeQuery();
+			
+			if(rs.next()) {
+				userInfo = new MemberDto();
+				userInfo.setId(rs.getString("id"));
+				userInfo.setName(rs.getString("name"));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose(cn, ps, rs);
+		}
+		
+		return userInfo;
+	}
+
 }

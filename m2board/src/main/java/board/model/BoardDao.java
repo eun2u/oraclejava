@@ -51,5 +51,32 @@ public class BoardDao { //DAO(Data Access Object)
 		if(ps!=null) try{ps.close();} catch(Exception e){}
 		if(cn!=null) try{cn.close();} catch(Exception e){}		
 	}
+	
+	public boolean insertBoard(BoardDto boardDto) {
+		Connection cn = null;
+		PreparedStatement ps = null;
+		boolean result=false;
+		String sql = "INSERT INTO TBL_BOARD(no,title,content,id) "+
+					 "VALUES(seq_board.nextval, ?, ?,?) ";
+		
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			
+			ps.setString(1, boardDto.getTitle());
+			ps.setString(2, boardDto.getContent());
+			ps.setString(3, boardDto.getMemberDto().getId());
+		
+			ps.executeUpdate();
+			result=true;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose(cn, ps);
+		}
+		
+		return result;
+	}
 
 }

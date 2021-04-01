@@ -36,7 +36,7 @@ CREATE TABLE tbl_member
 	birth date,
 	phone varchar2(30),
 	zipcode varchar2(6),
-	address varchar2(120),
+	address1 varchar2(120),
 	address2 varchar2(60),
 	PRIMARY KEY (id)
 );
@@ -51,4 +51,8 @@ ALTER TABLE tbl_board
 
 INSERT INTO TBL_MEMBER(id,name,password,birth) VALUES('abc','에이비','1111','2000-01-01');
 
+INSERT INTO TBL_BOARD(no,title,content,id) VALUES(seq_board.nextval, 'gg', 'gg','son') ;
+
 select count(*) as cnt from tbl_member where id='abc';
+
+select * from tbl_member;
