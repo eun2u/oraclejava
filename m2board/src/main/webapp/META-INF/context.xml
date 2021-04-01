@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="OracleCP" auth="Container" driverClassName="oracle.jdbc.OracleDriver" type="javax.sql.DataSource"
+      				url="jdbc:oracle:thin:@localhost:1521:xe"
+      				username="oraclejava" password="oraclejava" maxActive="50" maxWait="-1" />
+</Context>
