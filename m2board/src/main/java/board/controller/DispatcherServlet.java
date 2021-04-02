@@ -9,12 +9,13 @@ import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-
+@WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
 	private Logger logger = Logger.getLogger(DispatcherServlet.class);
 	private Map<String, AbstractController> actionMap = new HashMap<String, AbstractController>();

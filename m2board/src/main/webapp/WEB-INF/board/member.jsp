@@ -7,13 +7,26 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/board.css" type="text/css" />
 <script type="text/javascript" src="js/ajax.js"></script>
+<!-- daum 주소 찾기 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 var user_id_count=0;
 var user_id='';
 //-1: 시스템 오류, 0: 사용할 수 있는 아이디, 1: 사용할 수 없는 아이디
 
 function openZipcode(){
-	window.open('Zipcode.do','zipcode','width=400,height=400');
+	 new daum.Postcode({
+	        oncomplete: function(data) { //data: 사용자가 선택한 주소 정보를 담고 있는 객체
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+	            
+	           // alert('우편번호: '+data.zonecode + '\n도로명주소 : '+data.roadAddress);
+	        	var f=document.regist; //f는 form태그. opener는 부모 객체
+	        	f.zipcode.value=data.zonecode;
+	        	f.address1.value=data.roadAddress;
+	        }
+	    }).open();
+	//window.open('Zipcode.do','zipcode','width=400,height=400');
 }
 
 

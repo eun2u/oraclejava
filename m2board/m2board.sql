@@ -55,7 +55,7 @@ INSERT INTO TBL_BOARD(no,title,content,id) VALUES(seq_board.nextval, 'gg', 'gg',
 
 select count(*) as cnt from tbl_member where id='abc';
 
-select * from tbl_board;
+select * from tbl_member;
 
 
 select b.no, b.title, b.id, b.regdate, b.readcount, m.name
