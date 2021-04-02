@@ -55,7 +55,7 @@ INSERT INTO TBL_BOARD(no,title,content,id) VALUES(seq_board.nextval, 'gg', 'gg',
 
 select count(*) as cnt from tbl_member where id='abc';
 
-select * from tbl_member;
+select * from tbl_board;
 
 
 select b.no, b.title, b.id, b.regdate, b.readcount, m.name
@@ -72,3 +72,7 @@ where b.no=7;
 update tbl_board
 set readcount= readcount+1
 where no=7;
+
+delete tbl_board b join TBL_MEMBER m
+on b.id=m.id
+where b.no=2 and m.password='1111';

@@ -120,7 +120,7 @@ public class BoardDao { //DAO(Data Access Object)
 		return list;
 	}
 
-	public BoardDto getBoardView(int no) {
+	public BoardDto getBoardView(Long no) {
 		Connection cn=null;
 		PreparedStatement ps = null;
 		ResultSet rs=null;
@@ -161,7 +161,7 @@ public class BoardDao { //DAO(Data Access Object)
 		return boardDto;
 	}
 
-	public boolean updateReadCount(int no) {
+	public boolean updateReadCount(Long no) {
 		
 		Connection cn=null;
 		PreparedStatement ps = null;
@@ -176,6 +176,62 @@ public class BoardDao { //DAO(Data Access Object)
 			ps=cn.prepareStatement(sql);
 			ps.setLong(1, no);
 			
+			if(ps.executeUpdate() > 0) {
+				result=true;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			dbClose(cn, ps);
+		}
+		return result;
+	}
+
+	public boolean updateBoard(BoardDto boardDto) {
+		Connection cn=null;
+		PreparedStatement ps = null;
+		
+		String sql="UPDATE tbl_board "
+				+ "SET title=? , content=? "
+				+ "WHERE no=? AND ID=?";
+		boolean result =false;
+		
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			ps.setString(1, boardDto.getTitle());
+			ps.setString(2, boardDto.getContent());
+			ps.setLong(3, boardDto.getNo());
+			ps.setString(4, boardDto.getMemberDto().getId());
+			
+			if(ps.executeUpdate() > 0) {
+				result=true;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			dbClose(cn, ps);
+		}
+		return result;
+	}
+
+	public boolean deleteBoard(Long no) {
+		Connection cn=null;
+		PreparedStatement ps = null;
+		
+		String sql="DELETE tbl_board "
+				 + "WHERE no=? ";
+		boolean result =false;
+		
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			ps.setLong(1, no);
+
 			if(ps.executeUpdate() > 0) {
 				result=true;
 			}
