@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/webdev/img/favicon.png">
+<script type="text/javascript" src="jquery-3.6.0.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('#idCheck').click(function(){
+		var id=$('#id').val();
+		//alert(id);
+		//alert('test');
+		
+		$.ajax({
+			type: 'GET',
+			data:{'id':id},
+			url: '../CheckID',
+			success: function(result){
+				var msg=null;
+				var count =parseInt(result);
+				if(count==1){
+					msg='<font color="red"> 이미 존재하는 아이디입니다.</font>';
+				}else if(count==0){
+					msg='<font color="green"> 사용할 수 있는 아이디입니다.</font>';
+				}else {
+					msg='<font color="red"> DB 연결 에러...</font>';
+				}
+				
+				document.getElementById('rcvData').innerHTML = '<h1>'+msg+'</h1>';
+				$('#rcvData').html('<h1>'+msg+'</h1>');
+				
+			}
+		});
+	});
+});
+
+</script>
+</head>
+<body>
+아이디 중복체크: <input type="text" id="id"/>
+<input type="button" value="ID 중복체크" id="idCheck"/>
+<hr/>
+<div id="rcvData"></div>
+<hr/>
+</body>
+</html>

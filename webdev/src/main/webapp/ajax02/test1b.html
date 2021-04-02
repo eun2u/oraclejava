@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-3.6.0.js"></script>
+<script type="text/javascript">
+//alert('jQuery'+jQuery.fn.jquery);
+$(document).ready(function(){
+	console.log('document ready~!');
+	$('td').click(function(){
+		$(this).hide();
+	});
+});
+</script>
+</head>
+<body>
+<table>
+<tr>
+	<td>1. 클릭하면 사라집니다.</td> <!-- this는 td태그 자기자신 -->
+</tr>
+<tr>
+	<td>2. 클릭하면 사라집니다.</td>
+</tr>
+<tr>
+	<td>3. 클릭하면 사라집니다.</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="icon" type="image/png" sizes="16x16" href="/webdev/img/favicon.png">
+<script type="text/javascript" src="jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#say').click(function(){
+		//alert('say 클릭');
+		var name=$('#name').val();
+		$.ajax({
+			type:'POST',
+			data:{'name' : name},
+			url:'iam.jsp',
+			success: function(result){
+				$('#rcvData').html('<h1>' + result + '</h1>');
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<input type="text" id="name"/>
+<input type="button" value="say" id="say" />
+<hr/>
+<div id="rcvData"></div>
+<hr/>
+</body>
+</html>
