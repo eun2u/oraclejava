@@ -21,7 +21,7 @@
 </tr>
 <tr>
 	<th>이름</th>
-	<td>${boardDto.name }</td>
+	<td>${boardDto.memberDto.name }(${boardDto.memberDto.id })</td>
 </tr>
 <tr>
 	<th>조회수</th>
@@ -29,7 +29,7 @@
 </tr>
 <tr>
 	<th>작성시간</th>
-	<td>${boardDto.writeday }</td>
+	<td>${boardDto.regdate }</td>
 </tr>
 <tr>
 	<th>내용</th>

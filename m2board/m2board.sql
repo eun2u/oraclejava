@@ -56,3 +56,19 @@ INSERT INTO TBL_BOARD(no,title,content,id) VALUES(seq_board.nextval, 'gg', 'gg',
 select count(*) as cnt from tbl_member where id='abc';
 
 select * from tbl_member;
+
+
+select b.no, b.title, b.id, b.regdate, b.readcount, m.name
+from tbl_board b join tbl_member m
+on b.id=m.id
+order by b.no desc;
+
+
+select b.no, b.title, m.name, b.readcount, b.regdate, b.content
+from tbl_board b join tbl_member m
+on b.id=m.id
+where b.no=7;
+
+update tbl_board
+set readcount= readcount+1
+where no=7;

@@ -79,4 +79,114 @@ public class BoardDao { //DAO(Data Access Object)
 		return result;
 	}
 
+	public List<BoardDto> getBoardList() {
+		Connection cn=null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<BoardDto> list = new ArrayList<BoardDto>();
+		
+		String sql = "SELECT b.no, b.title, b.id, b.regdate, b.readcount, m.name "
+					+ "FROM tbl_board b join tbl_member m "
+					+ "ON b.id=m.id "
+					+ "ORDER BY b.no DESC ";
+		
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				MemberDto memberDto = new MemberDto();
+				memberDto.setId(rs.getString("id"));
+				memberDto.setName(rs.getString("name"));
+				
+				BoardDto boardDto = new BoardDto();
+				boardDto.setNo(rs.getLong("no"));
+				boardDto.setTitle(rs.getString("title"));
+				boardDto.setReadcount(rs.getInt("readcount"));
+				boardDto.setRegdate(rs.getString("regdate"));
+				boardDto.setMemberDto(memberDto);
+				
+				list.add(boardDto);
+			}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose(cn, ps, rs);
+		}
+		
+		return list;
+	}
+
+	public BoardDto getBoardView(int no) {
+		Connection cn=null;
+		PreparedStatement ps = null;
+		ResultSet rs=null;
+		
+		String sql="SELECT b.no, b.title, m.name, b.readcount, b.regdate, b.content, b.id "
+				+ "FROM tbl_board b JOIN tbl_member m "
+				+ "ON b.id=m.id "
+				+ "WHERE b.no= ? ";
+		BoardDto boardDto = new BoardDto();
+		
+		
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			ps.setLong(1, no);
+			rs=ps.executeQuery();
+			
+			if(rs.next()) {
+				MemberDto memberDto=new MemberDto();
+
+				boardDto.setNo(rs.getLong("no"));
+				boardDto.setTitle(rs.getString("title"));
+				memberDto.setName(rs.getString("name"));
+				memberDto.setId(rs.getString("id"));
+				boardDto.setMemberDto(memberDto);
+				boardDto.setReadcount(rs.getInt("readcount"));
+				boardDto.setRegdate(rs.getString("regdate"));
+				boardDto.setContent(rs.getString("content"));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			dbClose(cn, ps, rs);
+		}
+		
+		return boardDto;
+	}
+
+	public boolean updateReadCount(int no) {
+		
+		Connection cn=null;
+		PreparedStatement ps = null;
+		
+		String sql="UPDATE tbl_board "
+				+ "SET readcount= readcount+1 "
+				+ "WHERE no=? ";
+		boolean result =false;
+		
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			ps.setLong(1, no);
+			
+			if(ps.executeUpdate() > 0) {
+				result=true;
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			dbClose(cn, ps);
+		}
+		return result;
+	}
+
 }

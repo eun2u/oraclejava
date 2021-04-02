@@ -19,15 +19,15 @@ ${logInfo } <a href="Logout.do">[로그아웃]</a>
 	<th>작성일</th>
 	<th>조회수</th>
 </tr>
-<%-- <c:forEach items="${list}" var="dto"> --%>
-<!-- <tr> -->
-<%-- 	<td>${dto.no}</td> --%>
-<%-- 	<td><a href="BoardView.do?no=${dto.no}">${dto.title}</a></td> --%>
-<%-- 	<td>${dto.name}</td> --%>
-<%-- 	<td>${dto.writeday}</td> --%>
-<%-- 	<td align="right">${dto.readcount}</td> --%>
-<!-- </tr> -->
-<%-- </c:forEach> --%>
+<c:forEach items="${list}" var="dto">
+<tr>
+	<td>${dto.no}</td>
+	<td><a href="BoardView.do?no=${dto.no}">${dto.title}</a></td>
+	<td>${dto.memberDto.name}(${dto.memberDto.id })</td>
+	<td>${dto.regdate}</td>
+	<td align="right">${dto.readcount}</td>
+</tr>
+</c:forEach>
 </table>
 <a href="BoardInsert.do">[글쓰기]</a>
 </body>
