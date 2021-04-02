@@ -11,7 +11,6 @@ import board.model.BoardDto;
 import board.model.MemberDto;
 
 public class BoardDeleteAction extends AbstractController{
-	private static Logger logger = Logger.getLogger(BoardDeleteAction.class);
 	@Override
 	public ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
@@ -26,19 +25,20 @@ public class BoardDeleteAction extends AbstractController{
 		
 		
 		Long no = Long.parseLong(request.getParameter("no"));
-		
 		BoardDao boardDao = BoardDao.getInstance();
 		boolean result = boardDao.deleteBoard(no);
 		
+		ModelAndView mav = new ModelAndView("/WEB-INF/board/result.jsp");
 		if(result) {
-			return new ModelAndView("redirect:BoardList.do");
+			mav.addObject("msg", no+"번 게시물이 삭제되었습니다.");
+			mav.addObject("url","BoardList.do");
 			
 		}else {
-			ModelAndView mav = new ModelAndView("/WEB-INF/board/result.jsp");
 			mav.addObject("msg","글 삭제 실패!!" );
 			mav.addObject("url", "javascript:history.back();");
-			return mav;
 		}
+		return mav;
+
 		
 	}
 

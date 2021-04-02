@@ -79,22 +79,35 @@ public class BoardDao { //DAO(Data Access Object)
 		return result;
 	}
 
-	public List<BoardDto> getBoardList() {
+	public List<BoardDto> getBoardList(Long startnum, Long endnum) {
 		Connection cn=null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<BoardDto> list = new ArrayList<BoardDto>();
 		
-		String sql = "SELECT b.no, b.title, b.id, b.regdate, b.readcount, m.name "
-					+ "FROM tbl_board b join tbl_member m "
-					+ "ON b.id=m.id "
-					+ "ORDER BY b.no DESC ";
+//		String sql = "SELECT b.no, b.title, b.id, b.regdate, b.readcount, m.name "
+//					+ "FROM tbl_board b join tbl_member m "
+//					+ "ON b.id=m.id "
+//					+ "ORDER BY b.no DESC ";
+		
+		String sql="SELECT B.* "
+				+ "        FROM (SELECT rownum AS rnum, A.* "
+				+ "              FROM (SELECT b.no, b.title, m.id,  "
+				+ "                           case when to_char(b.regdate, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD') "
+				+ "                                then to_char(b.regdate, 'HH24:MI:SS')   "
+				+ "                                else to_char(b.regdate, 'YYYY-MM-DD') end AS regdate, b.readcount, m.name  "
+				+ "                    FROM tbl_board b join tbl_member m "
+				+ "                    ON b.id = m.id  	 "
+				+ "                    ORDER BY no DESC) A) B "
+				+ "        WHERE ?<=rnum AND rnum<=? ";
 		
 		try {
 			cn=getConnection();
 			ps=cn.prepareStatement(sql);
+			ps.setLong(1, startnum);
+			ps.setLong(2, endnum);
 			rs=ps.executeQuery();
-			
+
 			while(rs.next()) {
 				MemberDto memberDto = new MemberDto();
 				memberDto.setId(rs.getString("id"));
@@ -242,6 +255,32 @@ public class BoardDao { //DAO(Data Access Object)
 		}finally {
 			dbClose(cn, ps);
 		}
+		return result;
+	}
+
+	public long getRecordCount() { //전체 레코드 수
+		Connection cn =null;
+		PreparedStatement ps = null;
+		ResultSet rs=null;
+		
+		long result=0L;
+		String sql="SELECT count(*) as cnt FROM tbl_board ";
+		
+		try {
+			cn=getConnection();
+			ps=cn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			
+			if(rs.next()) {
+				result=rs.getLong("cnt");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbClose(cn, ps);
+		}
+		
 		return result;
 	}
 
