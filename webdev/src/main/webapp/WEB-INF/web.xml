@@ -48,6 +48,15 @@
   	<url-pattern>/BasketFront</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+  	<servlet-name>dispatcher</servlet-name>
+  	<servlet-class>board.controller.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>dispatcher</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
   	<servlet-name>check</servlet-name>
   	<servlet-class>servlet.Iam</servlet-class>

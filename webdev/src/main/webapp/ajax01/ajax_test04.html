@@ -45,7 +45,7 @@ var process = function(xhr){
 	}else if(count==0){
 		msg='<font color="green"> 사용할 수 있는 아이디입니다.</font>';
 	}else {
-		nsg='<font color="red"> DB 연결 에러...</font>';
+		msg='<font color="red"> DB 연결 에러...</font>';
 	}
 	
 	document.getElementById('rcvData').innerHTML = '<h1>'+msg+'</h1>';
